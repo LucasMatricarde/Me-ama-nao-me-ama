@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Me ama, n&atilde;o me ama</title>
+  <style>
+    body {
+      background: #ffe0ef;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+    .container {
+      position: relative;
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .frase, .frase-final {
+      text-align: center;
+      font-size: 2.2em;
+      font-weight: bold;
+      margin: 35px 0 28px 0;
+      color: #9e1857;
+      min-height: 1.5em;
+      user-select: none;
+      letter-spacing: 1px;
+      text-shadow: 0px 2px 8px #fff2fa;
+      width: 100%;
+      transition: opacity 0.5s;
+      font-family: "Segoe UI", Arial, sans-serif;
+      position: relative;
+      z-index: 10;
+    }
+    .flor-area {
+      position: relative;
+      width: 350px;
+      height: 430px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .flor {
+      position: relative;
+      width: 350px;
+      height: 350px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .caule-sobreposto {
+      position: absolute;
+      left: 50%;
+      top: calc(50% + 41px);
+      transform: translate(-50%, 0);
+      width: 22px;
+      height: 120px;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .petala {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform-origin: bottom center;
+      cursor: pointer;
+      opacity: 1;
+      transition: opacity 0.3s, transform 0.2s;
+      z-index: 2;
+    }
+    .petala svg {
+      pointer-events: none;
+      display: block;
+    }
+    .centro {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -47%);
+      z-index: 3;
+      pointer-events: none;
+    }
+    .frase-final {
+      opacity: 0;
+      transition: opacity 0.7s;
+      position: absolute;
+      top: 90px;
+      left: 0;
+      width: 100%;
+      z-index: 11;
+      pointer-events: none;
+      background: none;
+      margin: 0;
+      animation: none;
+    }
+    .frase-final.mostrar {
+      opacity: 1;
+      animation: aparecer 1.3s cubic-bezier(.42,0,.58,1.11);
+    }
+    @keyframes aparecer {
+      0% {transform: scale(0.7);opacity:0;}
+      70%{transform: scale(1.07);}
+      100%{transform: scale(1);opacity:1;}
+    }
+    /* Bot�o reiniciar estilizado */
+    .btn-reiniciar {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 99;
+      background: linear-gradient(90deg,#f68eaa 30%, #ffdbe7 100%);
+      color: #9e1857;
+      border: none;
+      border-radius: 40px 20px 40px 20px;
+      padding: 15px 30px 15px 38px;
+      font-size: 1.25em;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: bold;
+      box-shadow: 0 8px 24px #df5fa222;
+      cursor: pointer;
+      outline: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.7s, bottom 0.5s;
+      letter-spacing: 1px;
+      user-select: none;
+    }
+    .btn-reiniciar.mostrar {
+      opacity: 1;
+      pointer-events: auto;
+      bottom: 38px;
+    }
+    .btn-reiniciar svg {
+      width: 1.5em;
+      height: 1.5em;
+      fill: #9e1857;
+      margin-right: 0;
+    }
+    @media (max-width:500px){
+      .btn-reiniciar {
+        bottom: 18px;
+        left: 8px;
+        padding: 12px 16px 12px 30px;
+        font-size: 1.07em;
+      }
+      .container, .flor-area, .flor { width: 97vw !important;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="frase" id="frase">Me ama</div>
+    <div class="flor-area">
+      <div class="flor" id="flor">
+        <!-- Caule -->
+        <div class="caule-sobreposto">
+          <svg width="22" height="120">
+            <path d="M11,0 Q4,40 16,62 Q3,77 11,120" stroke="#3a9141" stroke-width="5" fill="none"/>
+            <ellipse cx="17" cy="38" rx="7" ry="4" fill="#5bd46a" transform="rotate(-10 17 38)" />
+            <ellipse cx="5" cy="78" rx="5" ry="3" fill="#5bd46a" transform="rotate(9 5 78)" />
+          </svg>
+        </div>
+
+        <!-- Centro da flor -->
+        <div class="centro">
+          <svg width="84" height="84">
+            <circle cx="42" cy="42" r="42" fill="#ecd032" stroke="#d2a92a" stroke-width="6"/>
+          </svg>
+        </div>
+
+        <div class="frase frase-final" id="mensagem-final">O destino decidiu que a gente se ame</div>
+      </div>
+    </div>
+  </div>
+  <button class="btn-reiniciar" id="btnReiniciar" aria-label="Reiniciar" title="Recome�ar" type="button">
+    <svg viewBox="0 0 28 28"><path d="M24.53 13A10.5 10.5 0 0 0 5.16 7.13V3.75a.75.75 0 0 0-1.5 0v5A.75.75 0 0 0 4.4 9.5h5a.75.75 0 0 0 0-1.5H6.7a9.03 9.03 0 1 1-2.06 8.94.75.75 0 1 0-1.44.43A10.5 10.5 0 1 0 24.53 13Z"/></svg>
+    Recomeçar
+  </button>
+  <script>
+    var petalas = 8;
+    var flor = document.getElementById('flor');
+    var frase = document.getElementById('frase');
+    var mensagemFinal = document.getElementById('mensagem-final');
+    var btnReiniciar = document.getElementById('btnReiniciar');
+    var frases = ["Me ama", "N&atilde;o me ama"];
+    var estado = 0;
+    var petalasRestantes = petalas;
+
+    for (var i = 0; i < petalas; i++) {
+      var div = document.createElement('div');
+      div.className = "petala";
+      div.style.transform =
+        "translate(-50%, -100%) rotate(" + (i * (360/petalas)) + "deg)";
+      div.innerHTML =
+        '<svg width="84" height="130">'+
+        '<ellipse cx="42" cy="85" rx="34" ry="47" fill="#f7bbdf" stroke="#e47db9" stroke-width="2"/>'+
+        '<ellipse cx="42" cy="70" rx="8" ry="18" fill="#fff6f9" opacity="0.3"/></svg>';
+      (function(el){
+        var clicada = false;
+        el.addEventListener('click', function() {
+          if (clicada || mensagemFinal.classList.contains("mostrar")) return;
+          clicada = true;
+          el.style.opacity = "0";
+          el.style.pointerEvents = "none";
+          estado = (estado + 1) % 2;
+          frase.innerHTML = frases[estado];
+          petalasRestantes--;
+            if (petalasRestantes === 0) {
+            setTimeout(function() {
+                mensagemFinal.classList.add("mostrar");
+                mensagemFinal.innerHTML = "É meu amor... O destino decidiu que a gente se ame ♥";
+                btnReiniciar.classList.add("mostrar");
+            }, 500);
+            }
+        });
+      })(div);
+
+      var centro = flor.querySelector('.centro');
+      flor.insertBefore(div, centro);
+    }
+
+    btnReiniciar.addEventListener('click', function(){
+      location.reload();
+    });
+  </script>
+</body>
+</html>
